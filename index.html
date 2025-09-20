@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EkoModa - Tekstil Atık Krizi & Bilinçli Tüketim</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(45deg, #3498db, #2ecc71);
+            --danger-gradient: linear-gradient(45deg, #e74c3c, #c0392b);
+            --warning-gradient: linear-gradient(45deg, #f39c12, #e67e22);
+            --success-gradient: linear-gradient(45deg, #27ae60, #2ecc71);
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --background-light: #f8f9fa;
+            --shadow-soft: 0 15px 35px rgba(0,0,0,0.1);
+            --shadow-strong: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-gradient);
+            color: white;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid #3498db;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .shock-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .shock-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shock-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--danger-gradient);
+        }
+        
+        .shock-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .shock-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .shock-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+        
+        .content-section {
+            background: white;
+            margin: 50px 0;
+            padding: 60px 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            font-weight: 800;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 5px;
+            background: var(--secondary-gradient);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin: 50px 0;
+        }
+        
+        .crisis-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 6px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .crisis-card.danger { border-left-color: #e74c3c; }
+        .crisis-card.warning { border-left-color: #f39c12; }
+        .crisis-card.info { border-left-color: #3498db; }
+        
+        .crisis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            border-radius: 0 20px 0 50px;
+        }
+        
+        .crisis-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .crisis-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .crisis-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .crisis-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+        
+        .verification-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--secondary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .verification-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .donation-section {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 25px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .donation-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .donation-title {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+        
+        .donation-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .donation-amounts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .amount-btn {
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+            font-weight: 700;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .amount-btn:hover, .amount-btn.selected {
+            background: rgba(255,255,255,0.95);
+            color: #667eea;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .custom-donation {
+            margin: 30px 0;
+        }
+        
+        .custom-donation input {
+            padding: 18px 25px;
+            font-size: 1.3rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            width: 250px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .custom-donation input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .impact-preview {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-donate {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-size: 1.4rem;
+            padding: 22px 50px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-donate:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255,107,107,0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 25px;
+            position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-100px) scale(0.8);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #e74c3c;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--background-light);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--secondary-gradient);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-strong);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-size: 1.8rem;
+            z-index: 1000;
+        }
+        
+        .ai-assistant:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.4);
+        }
+        
+        .ai-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #3498db;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        .progress-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            margin: 50px 0;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .progress-item {
+            margin: 40px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 15px;
+            height: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary-gradient);
+            border-radius: 15px;
+            transition: width 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .psychological-trigger {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+        
+        .countdown {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+            .donation-title { font-size: 2.2rem; }
+            .shock-stats { grid-template-columns: 1fr; }
+            .crisis-grid { grid-template-columns: 1fr; }
+            .donation-amounts { flex-direction: column; align-items: center; }
+            .amount-btn { min-width: 200px; }
+            .header-content { flex-direction: column; text-align: center; }
+            .modal-content { margin: 10% auto; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    🌱 EkoModa
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-secondary" onclick="openModal('loginModal')">
+                        🔐 Giriş Yap
+                    </a>
+                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">
+                        🤝 Yardım Sever Üyesi Ol
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>🚨 Tekstil Atık Krizi</h1>
+                    <p class="hero-subtitle">
+                        Her saniye bir çöp kamyonu dolusu kıyafet çöpe atılıyor. Bu çevresel felaket durdurulamaz mı? 
+                        Kıyafet bağışları gerçekten yardım ediyor mu yoksa daha büyük bir soruna mı dönüşüyor?
+                    </p>
+                </div>
+                
+                <div class="shock-stats">
+                    <div class="shock-card">
+                        <div class="shock-number">92M</div>
+                        <div class="shock-label">Ton Yıllık Tekstil Atığı</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">200</div>
+                        <div class="shock-label">Yıl Ayrışma Süresi</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">%90</div>
+                        <div class="shock-label">Bağışlanan Kıyafet Atık</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">2,700L</div>
+                        <div class="shock-label">1 Tişört İçin Su</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section class="content-section">
+                <h2 class="section-title">💣 Şok Edici Gerçekler: Kıyafet "Yardımı" Felaketi</h2>
+                
+                <div class="crisis-grid">
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">🔥</span>
+                        <h3>Fast Fashion Çevre Katliamı</h3>
+                        <p>
+                            Moda endüstrisi dünyanın en kirletici 2. endüstrisi! Her yıl 92 milyon ton tekstil atığı üretiliyor. 
+                            Bu saniye başına bir çöp kamyonu dolusu kıyafet demek. Sentetik kumaşlar 200 yıl boyunca toprakta 
+                            ayrışmıyor ve mikroplastik kirliliği yaratarak gıda zincirini zehirliyor.
+                        </p>
+                        <a href="https://www.unep.org/news-and-stories/press-release/un-alliance-sustainable-fashion-addresses-damage-caused-fast-fashion" 
+                           target="_blank" class="verification-link">
+                            🔗 UN Çevre Programı Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card warning">
+                        <span class="crisis-icon">💧</span>
+                        <h3>Su Kirliliği ve İsraf Felaketi</h3>
+                        <p>
+                            Tekstil sektörü küresel su kirliliğinin %20'sinden sorumlu. Tek bir pamuklu tişört için 2.700 litre 
+                            su kullanılıyor - bir kişinin 2.5 yıllık içme suyu! Tekstil boyama işlemleri nehirleri zehirliyor, 
+                            yeraltı suları kirletiliyor ve milyonlarca insanın temiz suya erişimini engelliyor.
+                        </p>
+                        <a href="https://www.worldwildlife.org/industries/cotton" 
+                           target="_blank" class="verification-link">
+                            🔗 WWF Su Kullanımı Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">🗑️</span>
+                        <h3>Kıyafet Bağışı Büyük Yalanı</h3>
+                        <p>
+                            Bağışladığınız kıyafetlerin %90'ı kullanılmıyor! Afrika'ya gönderilen "yardım" kıyafetleri 
+                            yerel tekstil endüstrisini yok ediyor ve dev çöp dağlarına dönüşüyor. Ghana'daki Kantamanto 
+                            pazarında günde 15 milyon parça "yardım" kıyafeti çöpe atılıyor!
+                        </p>
+                        <a href="https://www.bbc.com/future/article/20200710-why-clothes-are-so-hard-to-recycle" 
+                           target="_blank" class="verification-link">
+                            🔗 BBC Araştırması
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card info">
+                        <span class="crisis-icon">♻️</span>
+                        <h3>Geri Dönüşüm İmkansızlığı Skandalı</h3>
+                        <p>
+                            Kıyafetlerin sadece %1'i yeni kıyafete geri dönüştürülebiliyor! Karışık kumaş türleri, 
+                            kimyasal boyalar ve sentetik lifler geri dönüşümü teknik olarak neredeyse imkansız hale getiriyor. 
+                            "Geri dönüştürülebilir" etiketleri büyük bir aldatmaca!
+                        </p>
+                        <a href="https://ellenmacarthurfoundation.org/a-new-textiles-economy" 
+                           target="_blank" class="verification-link">
+                            🔗 Ellen MacArthur Vakfı Analizi
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card warning">
+                        <span class="crisis-icon">🌍</span>
+                        <h3>Karbon Ayak İzi Şoku</h3>
+                        <p>
+                            Moda endüstrisi havacılık ve denizcilik sektörlerinden daha fazla karbon salıyor! 
+                            Yılda 1.2 milyar ton sera gazı - küresel emisyonların %10'u. Bir kot pantolon üretimi 
+                            33 kg CO2 salımına neden oluyor.
+                        </p>
+                        <a href="https://unfccc.int/climate-action/sectoral-engagement/global-climate-action-from-fashion" 
+                           target="_blank" class="verification-link">
+                            🔗 BM İklim Değişikliği Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">👥</span>
+                        <h3>Çevresel Kolonyalizm Sorunu</h3>
+                        <p>
+                            "Yardım" kisvesi altında yapılan kıyafet bağışları gelişmekte olan ülkelerde yerel üretimi 
+                            yok ediyor.
+                            <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EkoModa - Tekstil Atık Krizi & Bilinçli Tüketim</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(45deg, #3498db, #2ecc71);
+            --danger-gradient: linear-gradient(45deg, #e74c3c, #c0392b);
+            --warning-gradient: linear-gradient(45deg, #f39c12, #e67e22);
+            --success-gradient: linear-gradient(45deg, #27ae60, #2ecc71);
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --background-light: #f8f9fa;
+            --shadow-soft: 0 15px 35px rgba(0,0,0,0.1);
+            --shadow-strong: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-gradient);
+            color: white;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid #3498db;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .shock-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .shock-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shock-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--danger-gradient);
+        }
+        
+        .shock-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .shock-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .shock-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+        
+        .content-section {
+            background: white;
+            margin: 50px 0;
+            padding: 60px 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            font-weight: 800;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 5px;
+            background: var(--secondary-gradient);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin: 50px 0;
+        }
+        
+        .crisis-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 6px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .crisis-card.danger { border-left-color: #e74c3c; }
+        .crisis-card.warning { border-left-color: #f39c12; }
+        .crisis-card.info { border-left-color: #3498db; }
+        
+        .crisis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            border-radius: 0 20px 0 50px;
+        }
+        
+        .crisis-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .crisis-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .crisis-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .crisis-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+        
+        .verification-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--secondary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .verification-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+        .donation-section {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 25px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .donation-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .donation-title {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+        
+        .donation-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .donation-amounts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .amount-btn {
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+            font-weight: 700;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .amount-btn:hover, .amount-btn.selected {
+            background: rgba(255,255,255,0.95);
+            color: #667eea;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .custom-donation {
+            margin: 30px 0;
+        }
+        
+        .custom-donation input {
+            padding: 18px 25px;
+            font-size: 1.3rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            width: 250px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .custom-donation input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .impact-preview {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-donate {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            font-size: 1.4rem;
+            padding: 22px 50px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-donate:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255,107,107,0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 25px;
+            position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-100px) scale(0.8);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #e74c3c;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--background-light);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--secondary-gradient);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-strong);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-size: 1.8rem;
+            z-index: 1000;
+        }
+        
+        .ai-assistant:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.4);
+        }
+        
+        .ai-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #3498db;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        .progress-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            margin: 50px 0;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .progress-item {
+            margin: 40px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 15px;
+            height: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary-gradient);
+            border-radius: 15px;
+            transition: width 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .psychological-trigger {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+        
+        .countdown {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+            .donation-title { font-size: 2.2rem; }
+            .shock-stats { grid-template-columns: 1fr; }
+            .crisis-grid { grid-template-columns: 1fr; }
+            .donation-amounts { flex-direction: column; align-items: center; }
+            .amount-btn { min-width: 200px; }
+            .header-content { flex-direction: column; text-align: center; }
+            .modal-content { margin: 10% auto; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    🌱 EkoModa
+                </div>
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-secondary" onclick="openModal('loginModal')">
+                        🔐 Giriş Yap
+                    </a>
+                    <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">
+                        🤝 Yardım Sever Üyesi Ol
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>🚨 Tekstil Atık Krizi</h1>
+                    <p class="hero-subtitle">
+                        Her saniye bir çöp kamyonu dolusu kıyafet çöpe atılıyor. Bu çevresel felaket durdurulamaz mı? 
+                        Kıyafet bağışları gerçekten yardım ediyor mu yoksa daha büyük bir soruna mı dönüşüyor?
+                    </p>
+                </div>
+                
+                <div class="shock-stats">
+                    <div class="shock-card">
+                        <div class="shock-number">92M</div>
+                        <div class="shock-label">Ton Yıllık Tekstil Atığı</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">200</div>
+                        <div class="shock-label">Yıl Ayrışma Süresi</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">%90</div>
+                        <div class="shock-label">Bağışlanan Kıyafet Atık</div>
+                    </div>
+                    <div class="shock-card">
+                        <div class="shock-number">2,700L</div>
+                        <div class="shock-label">1 Tişört İçin Su</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section class="content-section">
+                <h2 class="section-title">💣 Şok Edici Gerçekler: Kıyafet "Yardımı" Felaketi</h2>
+                
+                <div class="crisis-grid">
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">🔥</span>
+                        <h3>Fast Fashion Çevre Katliamı</h3>
+                        <p>
+                            Moda endüstrisi dünyanın en kirletici 2. endüstrisi! Her yıl 92 milyon ton tekstil atığı üretiliyor. 
+                            Bu saniye başına bir çöp kamyonu dolusu kıyafet demek. Sentetik kumaşlar 200 yıl boyunca toprakta 
+                            ayrışmıyor ve mikroplastik kirliliği yaratarak gıda zincirini zehirliyor.
+                        </p>
+                        <a href="https://www.unep.org/news-and-stories/press-release/un-alliance-sustainable-fashion-addresses-damage-caused-fast-fashion" 
+                           target="_blank" class="verification-link">
+                            🔗 UN Çevre Programı Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card warning">
+                        <span class="crisis-icon">💧</span>
+                        <h3>Su Kirliliği ve İsraf Felaketi</h3>
+                        <p>
+                            Tekstil sektörü küresel su kirliliğinin %20'sinden sorumlu. Tek bir pamuklu tişört için 2.700 litre 
+                            su kullanılıyor - bir kişinin 2.5 yıllık içme suyu! Tekstil boyama işlemleri nehirleri zehirliyor, 
+                            yeraltı suları kirletiliyor ve milyonlarca insanın temiz suya erişimini engelliyor.
+                        </p>
+                        <a href="https://www.worldwildlife.org/industries/cotton" 
+                           target="_blank" class="verification-link">
+                            🔗 WWF Su Kullanımı Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">🗑️</span>
+                        <h3>Kıyafet Bağışı Büyük Yalanı</h3>
+                        <p>
+                            Bağışladığınız kıyafetlerin %90'ı kullanılmıyor! Afrika'ya gönderilen "yardım" kıyafetleri 
+                            yerel tekstil endüstrisini yok ediyor ve dev çöp dağlarına dönüşüyor. Ghana'daki Kantamanto 
+                            pazarında günde 15 milyon parça "yardım" kıyafeti çöpe atılıyor!
+                        </p>
+                        <a href="https://www.bbc.com/future/article/20200710-why-clothes-are-so-hard-to-recycle" 
+                           target="_blank" class="verification-link">
+                            🔗 BBC Araştırması
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card info">
+                        <span class="crisis-icon">♻️</span>
+                        <h3>Geri Dönüşüm İmkansızlığı Skandalı</h3>
+                        <p>
+                            Kıyafetlerin sadece %1'i yeni kıyafete geri dönüştürülebiliyor! Karışık kumaş türleri, 
+                            kimyasal boyalar ve sentetik lifler geri dönüşümü teknik olarak neredeyse imkansız hale getiriyor. 
+                            "Geri dönüştürülebilir" etiketleri büyük bir aldatmaca!
+                        </p>
+                        <a href="https://ellenmacarthurfoundation.org/a-new-textiles-economy" 
+                           target="_blank" class="verification-link">
+                            🔗 Ellen MacArthur Vakfı Analizi
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card warning">
+                        <span class="crisis-icon">🌍</span>
+                        <h3>Karbon Ayak İzi Şoku</h3>
+                        <p>
+                            Moda endüstrisi havacılık ve denizcilik sektörlerinden daha fazla karbon salıyor! 
+                            Yılda 1.2 milyar ton sera gazı - küresel emisyonların %10'u. Bir kot pantolon üretimi 
+                            33 kg CO2 salımına neden oluyor.
+                        </p>
+                        <a href="https://unfccc.int/climate-action/sectoral-engagement/global-climate-action-from-fashion" 
+                           target="_blank" class="verification-link">
+                            🔗 BM İklim Değişikliği Raporu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card danger">
+                        <span class="crisis-icon">👥</span>
+                        <h3>Çevresel Kolonyalizm Sorunu</h3>
+                        <p>
+                            "Yardım" kisvesi altında yapılan kıyafet bağışları gelişmekte olan ülkelerde yerel üretimi 
+                            yok ediyor. Ghana'da 40.000 kişi işsiz kaldı. Batı'nın atıkları "yardım" adı altında 
+                            başka ülkelere gönderilerek çevresel kolonyalizm yapılıyor.
+                        </p>
+                        <a href="https://www.theguardian.com/world/2021/apr/27/second-hand-clothing-donations-ghana" 
+                           target="_blank" class="verification-link">
+                            🔗 Guardian Investigasyonu
+                        </a>
+                    </div>
+                    
+                    <div class="crisis-card info">
+                        <span class="crisis-icon">🧪</span>
+                        <h3>Kimyasal Kirlilik Felaketi</h3>
+                        <p>
+                            Tekstil üretiminde 8.000'den fazla kimyasal madde kullanılıyor. Bunların çoğu kanser 
+                            yapıcı, hormon bozucu ve çevreye son derece zararlı. Bu kimyasallar toprak ve su 
+                            kaynaklarında yüzyıllarca kalıyor.
+                        </p>
+                        <a href="https://www.greenpeace.org/international/story/17612/textile-pollution-fashion-detox/" 
+                           target="_blank" class="verification-link">
+                            🔗 Greenpeace Detoks Raporu
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bağış Havuzu Bölümü -->
+            <section class="content-section">
+                <h2 class="section-title">💰 Topluluk Bağış Havuzu</h2>
+                
+                <div class="donation-pool">
+                    <div class="pool-header">
+                        <h3>🎯 Mevcut Kampanya: Okullarda Farkındalık Eğitimi</h3>
+                        <p>10.000 öğrenciye tekstil atık farkındalığı eğitimi vermek için destek olun!</p>
+                    </div>
+                    
+                    <div class="pool-stats">
+                        <div class="pool-stat">
+                            <div class="stat-value" id="totalRaised">₺47,290</div>
+                            <div class="stat-label">Toplanan</div>
+                        </div>
+                        <div class="pool-stat">
+                            <div class="stat-value">₺75,000</div>
+                            <div class="stat-label">Hedef</div>
+                        </div>
+                        <div class="pool-stat">
+                            <div class="stat-value" id="donorCount">1,247</div>
+                            <div class="stat-label">Destekçi</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-progress">
+                        <div class="pool-progress-bar">
+                            <div class="pool-progress-fill" style="width: 63%"></div>
+                        </div>
+                        <div class="pool-percentage">%63 Tamamlandı</div>
+                    </div>
+                    
+                    <div class="pool-urgency">
+                        <div class="urgency-timer">
+                            <span class="timer-icon">⏰</span>
+                            <span class="timer-text">Kampanya bitimine kalan süre: </span>
+                            <span class="countdown" id="campaignCountdown">12 gün 8 saat</span>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-donations">
+                        <h4>💚 Son Destekçiler</h4>
+                        <div class="donation-ticker">
+                            <div class="ticker-item">
+                                <span class="donor-name">Ayşe K.</span>
+                                <span class="donor-amount">₺250</span>
+                                <span class="donor-time">2dk önce</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="donor-name">Mehmet T.</span>
+                                <span class="donor-amount">₺500</span>
+                                <span class="donor-time">5dk önce</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="donor-name">Zeynep A.</span>
+                                <span class="donor-amount">₺100</span>
+                                <span class="donor-time">8dk önce</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="donor-name">Ali R.</span>
+                                <span class="donor-amount">₺750</span>
+                                <span class="donor-time">12dk önce</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-impact">
+                        <h4>🌟 Bu Bağışlarla Neler Yapıldı:</h4>
+                        <div class="impact-items">
+                            <div class="impact-item">
+                                <span class="impact-icon">🎓</span>
+                                <span class="impact-text">6,847 öğrenciye eğitim verildi</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">🏫</span>
+                                <span class="impact-text">23 okulda farkındalık semineri</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">📚</span>
+                                <span class="impact-text">15,000 broşür dağıtıldı</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">🌱</span>
+                                <span class="impact-text">2,340 kişi bilinçli tüketici oldu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSS Eklemeleri -->
+            <style>
+                .donation-pool {
+                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                    padding: 40px;
+                    border-radius: 20px;
+                    margin-top: 30px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                }
+                
+                .pool-header {
+                    text-align: center;
+                    margin-bottom: 40px;
+                }
+                
+                .pool-header h3 {
+                    font-size: 2rem;
+                    color: var(--text-dark);
+                    margin-bottom: 15px;
+                }
+                
+                .pool-header p {
+                    font-size: 1.1rem;
+                    color: var(--text-light);
+                }
+                
+                .pool-stats {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    gap: 30px;
+                    margin: 30px 0;
+                }
+                
+                .pool-stat {
+                    text-align: center;
+                    padding: 20px;
+                    background: white;
+                    border-radius: 15px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+                }
+                
+                .stat-value {
+                    font-size: 2.5rem;
+                    font-weight: 900;
+                    color: #27ae60;
+                    margin-bottom: 8px;
+                }
+                
+                .stat-label {
+                    font-size: 0.95rem;
+                    color: var(--text-light);
+                    font-weight: 600;
+                }
+                
+                .pool-progress {
+                    margin: 30px 0;
+                }
+                
+                .pool-progress-bar {
+                    background: #e9ecef;
+                    border-radius: 25px;
+                    height: 30px;
+                    overflow: hidden;
+                    position: relative;
+                    margin-bottom: 10px;
+                }
+                
+                .pool-progress-fill {
+                    height: 100%;
+                    background: linear-gradient(45deg, #27ae60, #2ecc71);
+                    border-radius: 25px;
+                    transition: width 2s ease;
+                    position: relative;
+                }
+                
+                .pool-progress-fill::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+                    animation: shimmer 2s infinite;
+                }
+                
+                .pool-percentage {
+                    text-align: center;
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                    color: #27ae60;
+                }
+                
+                .pool-urgency {
+                    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                    color: white;
+                    padding: 20px;
+                    border-radius: 15px;
+                    text-align: center;
+                    margin: 30px 0;
+                }
+                
+                .urgency-timer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+                
+                .timer-icon {
+                    font-size: 1.5rem;
+                }
+                
+                .countdown {
+                    font-size: 1.5rem;
+                    font-weight: 900;
+                    color: #ffeb3b;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                }
+                
+                .recent-donations {
+                    margin: 30px 0;
+                }
+                
+                .recent-donations h4 {
+                    font-size: 1.4rem;
+                    margin-bottom: 20px;
+                    color: var(--text-dark);
+                    text-align: center;
+                }
+                
+                .donation-ticker {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    max-height: 200px;
+                    overflow-y: auto;
+                }
+                
+                .ticker-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 15px 20px;
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+                    animation: slideInRight 0.5s ease;
+                }
+                
+                @keyframes slideInRight {
+                    from { 
+                        opacity: 0; 
+                        transform: translateX(30px);
+                    }
+                    to { 
+                        opacity: 1; 
+                        transform: translateX(0);
+                    }
+                }
+                
+                .donor-name {
+                    font-weight: 600;
+                    color: var(--text-dark);
+                }
+                
+                .donor-amount {
+                    font-weight: 900;
+                    color: #27ae60;
+                    font-size: 1.1rem;
+                }
+                
+                .donor-time {
+                    font-size: 0.9rem;
+                    color: var(--text-light);
+                }
+                
+                .pool-impact {
+                    background: white;
+                    padding: 30px;
+                    border-radius: 15px;
+                    margin-top: 30px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+                }
+                
+                .pool-impact h4 {
+                    text-align: center;
+                    margin-bottom: 25px;
+                    font-size: 1.4rem;
+                    color: var(--text-dark);
+                }
+                
+                .impact-items {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 20px;
+                }
+                
+                .impact-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 15px;
+                    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+                    border-radius: 10px;
+                }
+                
+                .impact-icon {
+                    font-size: 1.5rem;
+                    width: 40px;
+                    text-align: center;
+                }
+                
+                .impact-text {
+                    font-weight: 600;
+                    color: var(--text-dark);
+                }
+                
+                @media (max-width: 768px) {
+                    .pool-stats {
+                        grid-template-columns: 1fr;
+                    }
+                    
+                    .urgency-timer {
+                        flex-direction: column;
+                        gap: 5px;
+                    }
+                    
+                    .impact-items {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
